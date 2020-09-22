@@ -1,0 +1,96 @@
+User
+  name
+  profile_picture
+  email
+  password
+  location
+  auto_pay
+  collection //TODO
+  following //TODO
+  playlists //TODO
+  listening_history //TODO
+  liked_tracks //TODO
+
+Artist
+  albums
+  admin
+  profile_picture
+  tracks
+  location
+  name
+  labels
+  followers
+  description
+  facebook_link
+  twitter_link
+  bandcamp_link
+  soundcloud_link
+  beatport_link
+  
+Label
+  admins
+  name
+  profile_picture
+  description
+  location
+  artists
+  albums
+  subscription_cost
+  email
+  discount_codes
+  facebook_link
+  twitter_link
+  bandcamp_link
+  soundcloud_link
+  beatport_link
+
+
+Tag
+  name
+  description
+  artists
+  albums
+  tracks
+  followers
+  
+
+Album
+  name
+  total_listens
+  description
+  genres
+  tracks
+  cost
+  artwork
+  artists
+  label
+  suggested_albums
+  release_date
+  bandcamp_link
+  beatport_link
+  
+  
+Track
+  total_listens
+  name
+  description
+  genres
+  artists
+  cost
+  playList
+  
+
+Listening History
+  tracks
+  playlists
+  albums
+  user
+  
+
+Playlist
+  created_at
+  updated_at
+  tracks
+  users
+  is_public
+
