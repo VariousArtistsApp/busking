@@ -45,4 +45,3 @@ class UserTests(GraphQLTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['name'], "Aarnav")
         self.assertEqual(data['email'], "asd@example.net")
-        # self.assertResponseNoErrors(response)

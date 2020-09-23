@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'graphene_django',
     'storages',
+    'busking_auth',
     'album',
     'artist',
     'label',
@@ -82,6 +83,9 @@ CORS_ALLOW_CREDENTIALS = True
 GRAPHENE = {
     "SCHEMA": "busking.schema.schema",
     "SCHEMA_INDENT": 2,
+    "MIDDLEWARE": [
+        "busking_auth.middleware.AuthorizationMiddleware"
+    ]
 }
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_REGION_NAME = 'ams'
