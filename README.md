@@ -1,3 +1,3 @@
 ## Busking
 
-Schema subject to change as it's very rough.
+Schema subject to change as it's yet to be finalized.
