@@ -1,14 +1,7 @@
 import graphene
-from graphene_django import DjangoObjectType
-from datetime import datetime
-from .models import CustomUser
-
-
-class UserType(DjangoObjectType):
-    class Meta:
-        model = CustomUser
-        fields = ('id', 'name', 'dob', 'email', 'profile_picture', 'location',
-                  'date_joined')
+from user.models import CustomUser
+from .type import UserType
+from .mutations import CreateUser, CreateLabelUser, CreateArtistUser
 
 
 class Query(graphene.ObjectType):
@@ -26,33 +19,11 @@ class Query(graphene.ObjectType):
             return None
 
 
-class CreateUserInput(graphene.InputObjectType):
-    name = graphene.String()
-    dob = graphene.String()
-    email = graphene.String()
-    location = graphene.String()
-    password = graphene.String()
-
-
-class CreateUser(graphene.Mutation):
-    class Arguments:
-        user_data = CreateUserInput(required=True)
-
-    user = graphene.Field(UserType)
-
-    def mutate(root, info, user_data=None):
-        
-        user = CustomUser.objects.create_user(name=user_data.name,
-                                         email=user_data.email,
-                                         password=user_data.password,
-                                         location=user_data.location,
-                                         dob=datetime.strptime(user_data.dob, "%m.%d.%Y"))
-        return CreateUser(user=user)
-
 
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
+    create_label_user = CreateLabelUser.Field()
+    create_artist_user = CreateArtistUser.Field()
 
 
-schema = graphene.Schema(query=Query, mutation=Mutation,
-                         types=[CreateUserInput])
+schema = graphene.Schema(query=Query, mutation=Mutation)

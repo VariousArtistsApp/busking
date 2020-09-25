@@ -10,6 +10,16 @@ from .managers import CustomUserManager
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    label_profile = models.OneToOneField(
+        'label.Label',
+        on_delete=models.CASCADE,
+        null=True
+    )
+    artist_profile = models.OneToOneField(
+        'artist.Artist',
+        on_delete=models.CASCADE,
+        null=True
+    )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=50, unique=True)
