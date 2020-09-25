@@ -21,6 +21,9 @@ def login_view(request):
             response.set_cookie("token", token.decode('utf-8'), httponly=True,
                                 samesite="strict", domain="localhost",
                                 max_age=3600)
+            response.set_cookie("logged_in", "true", httponly=False,
+                                samesite="strict", domain="localhost",
+                                max_age=3600)
             return response
         response = JsonResponse({"response": "failure",
                                  "error": "Bad email/password"})
