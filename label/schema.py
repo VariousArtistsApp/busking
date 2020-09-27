@@ -1,11 +1,13 @@
 import graphene
 from graphene_django import DjangoObjectType
-
+from user.type  import UserType
 from .models import Label
+
 
 class LabelType(DjangoObjectType):
     class Meta:
         model = Label
+        fields = '__all__'
 
 
 class Query(graphene.ObjectType):

@@ -48,14 +48,13 @@ class CreateArtistUser(graphene.Mutation):
         data = CreateArtistUserInput(required=True)
 
     user = graphene.Field(UserType)
-    artist = graphene.Field(ArtistType)
 
     def mutate(root, info, data=None):
         user = create_user(data)
         artist = Artist.objects.create(name=data.artistName)
         user.artist_profile = artist
         user.save()
-        return CreateArtistUser(user=user, artist=artist)
+        return CreateArtistUser(user=user)
 
 
 class CreateLabelUser(graphene.Mutation):
@@ -63,11 +62,10 @@ class CreateLabelUser(graphene.Mutation):
         data = CreateLabelUserInput(required=True)
 
     user = graphene.Field(UserType)
-    label = graphene.Field(LabelType)
 
     def mutate(root, info, data=None):
         user = create_user(data)
         label = Label.objects.create(name=data.labelName, email=data.email)
         user.label_profile = label
         user.save()
-        return CreateLabelUser(user=user, label=label)
+        return CreateLabelUser(user=user)
