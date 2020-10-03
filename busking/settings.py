@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
+    'djmoney',
     'storages',
     'user',
     'busking_auth',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'playlist',
     'tag',
     'track',
+    'payment',
     'django_extensions',
     'corsheaders',
 ]
@@ -102,7 +104,7 @@ STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
 AWS_S3_FILE_OVERWRITE = False
 
 PAYPAL_CLIENT_ID = config("PAYPAL_CLIENT_ID")
-PAYPAL_CLIENT_SECRET = config("PAYPAL_CLIENT_SECRET") 
+PAYPAL_CLIENT_SECRET = config("PAYPAL_CLIENT_SECRET")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
