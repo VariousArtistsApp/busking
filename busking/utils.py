@@ -67,7 +67,8 @@ def graphql_query(
 
     if headers:
         resp = client.post(
-            graphql_url, json.dumps(body), content_type="application/json", **headers
+            graphql_url, json.dumps(body), content_type="application/json",
+            **headers
         )
     else:
         resp = client.post(
@@ -77,7 +78,8 @@ def graphql_query(
 
 
 class GraphQLTestCaseWithCookies(GraphQLTestCase):
-    def query(self, query, op_name=None, input_data=None, variables=None, headers=None, login_token=None):
+    def query(self, query, op_name=None, input_data=None, variables=None,
+              headers=None, login_token=None):
         return graphql_query(
             query,
             op_name=op_name,
