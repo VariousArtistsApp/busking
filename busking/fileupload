@@ -1,0 +1,15 @@
+releases:
+  label_<id>/artist_<id>:
+    releaseName
+      wav:
+        x.wav
+      flac
+        x.flac
+      mp3
+        x.mp3
+      cover.jpg
+
+
+profiles:
+  label_<id>/artist_<id>:
+      profilePicture.jpg
