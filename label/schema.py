@@ -11,7 +11,8 @@ class LabelType(DjangoObjectType):
 
 class Query(graphene.ObjectType):
     all_labels = graphene.List(LabelType)
-    label_by_name = graphene.Field(LabelType, name=graphene.String(required=True))
+    label_by_name = graphene.Field(LabelType,
+                                   name=graphene.String(required=True))
 
     def resolve_all_labels(root, info):
         return Label.objects.all()
@@ -19,7 +20,7 @@ class Query(graphene.ObjectType):
     def resolve_label_by_name(root, info, name):
         try:
             return Label.objects.get(name=name)
-        except Category.DoesNotExist:
+        except Label.DoesNotExist:
             return None
 
 
