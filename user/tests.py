@@ -73,23 +73,24 @@ class UserTests(GraphQLTestCaseWithCookies):
         user['artistName'] = "fakeArtist"
         response = self.query(
         '''
-        mutation createArtistUser($input: CreateArtistUserInput!){
-            createArtistUser(data: $input){
+        mutation createUser($input: CreateUserInput!){
+            createUser(data: $input){
                 user {
                     id
                     name
                     email
                     artistProfile {
                         id
+                        name
                     }
                 }
             }
         }
         ''',
-        op_name="createArtistUser",
+        op_name="createUser",
         input_data=user
         )
-        data = response.json()['data']['createArtistUser']['user']
+        data = response.json()['data']['createUser']['user']
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['name'], user['name'])
         self.assertEqual(data['email'], user['email'])
@@ -100,23 +101,24 @@ class UserTests(GraphQLTestCaseWithCookies):
         user['labelName'] = "fakeLabel"
         response = self.query(
         '''
-        mutation createLabelUser($input: CreateLabelUserInput!){
-            createLabelUser(data: $input){
+        mutation createUser($input: CreateUserInput!){
+            createUser(data: $input){
                 user {
                     id
                     name
                     email
                     labelProfile {
                         id
+                        name
                     }
                 }
             }
         }
         ''',
-        op_name="createLabelUser",
+        op_name="createUser",
         input_data=user
         )
-        data = response.json()['data']['createLabelUser']['user']
+        data = response.json()['data']['createUser']['user']
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['name'], user['name'])
         self.assertEqual(data['email'], user['email'])

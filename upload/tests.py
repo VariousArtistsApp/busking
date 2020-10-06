@@ -27,7 +27,7 @@ class UploadTests(TestCase):
         user.label_profile = label
         user.save()
         with open("{0}/upload/2.png".format(os.getcwd()), "rb") as file:
-            response = self.client.post("/upload/profile_picture", {
+            response = self.client.post("/upload/profilePicture", {
                 "id": label.id,
                 "type": "label",
                 "profile_picture": SimpleUploadedFile("2.png",
@@ -35,6 +35,5 @@ class UploadTests(TestCase):
                                           content_type="image/png"),
             })
             response = response.json()
-            print(response)
             self.assertEqual(response["response"], "success")
             self.assertNotEqual(response["picture_url"], None)
