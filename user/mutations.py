@@ -17,19 +17,13 @@ def create_user(data):
 
 
 class CreateUserInput(graphene.InputObjectType):
-    name = graphene.String()
-    dob = graphene.String()
-    email = graphene.String()
-    location = graphene.String()
-    password = graphene.String()
-
-
-class CreateArtistUserInput(CreateUserInput, graphene.InputObjectType):
-    artistName = graphene.String()
-
-
-class CreateLabelUserInput(CreateUserInput, graphene.InputObjectType):
+    name = graphene.String(required=True)
+    dob = graphene.String(required=True)
+    email = graphene.String(required=True)
+    location = graphene.String(required=True)
+    password = graphene.String(required=True)
     labelName = graphene.String()
+    artistName = graphene.String()
 
 
 class CreateUser(graphene.Mutation):
@@ -40,32 +34,12 @@ class CreateUser(graphene.Mutation):
 
     def mutate(root, info, data=None):
         user = create_user(data)
+        if data.artistName:
+            artist = Artist.objects.create(name=data.artistName)
+            user.artist_profile = artist
+            user.save()
+        elif data.labelName:
+            label = Label.objects.create(name=data.labelName, email=data.email)
+            user.label_profile = label
+            user.save()
         return CreateUser(user=user)
-
-
-class CreateArtistUser(graphene.Mutation):
-    class Arguments:
-        data = CreateArtistUserInput(required=True)
-
-    user = graphene.Field(UserType)
-
-    def mutate(root, info, data=None):
-        user = create_user(data)
-        artist = Artist.objects.create(name=data.artistName)
-        user.artist_profile = artist
-        user.save()
-        return CreateArtistUser(user=user)
-
-
-class CreateLabelUser(graphene.Mutation):
-    class Arguments:
-        data = CreateLabelUserInput(required=True)
-
-    user = graphene.Field(UserType)
-
-    def mutate(root, info, data=None):
-        user = create_user(data)
-        label = Label.objects.create(name=data.labelName, email=data.email)
-        user.label_profile = label
-        user.save()
-        return CreateLabelUser(user=user)

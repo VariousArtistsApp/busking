@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'playlist',
     'tag',
     'track',
+    'upload',
     'payment',
     'django_extensions',
     'corsheaders',
@@ -102,7 +103,6 @@ AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
 AWS_S3_FILE_OVERWRITE = False
-
 PAYPAL_CLIENT_ID = config("PAYPAL_CLIENT_ID")
 PAYPAL_CLIENT_SECRET = config("PAYPAL_CLIENT_SECRET")
 TEMPLATES = [
