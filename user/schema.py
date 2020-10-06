@@ -1,7 +1,7 @@
 import graphene
 from user.models import CustomUser
 from .type import UserType
-from .mutations import CreateUser, CreateLabelUser, CreateArtistUser
+from .mutations import CreateUser
 
 
 class Query(graphene.ObjectType):
@@ -22,8 +22,6 @@ class Query(graphene.ObjectType):
 
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
-    create_label_user = CreateLabelUser.Field()
-    create_artist_user = CreateArtistUser.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
