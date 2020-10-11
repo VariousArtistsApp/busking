@@ -14,7 +14,7 @@ def login_view(request):
         if user:
             token = jwt.encode({'user': str(user.id),
                                 'exp': datetime.datetime.utcnow() +
-                                datetime.timedelta(seconds=30)},
+                                datetime.timedelta(seconds=5000)},
                                SECRET_KEY,
                                algorithm='HS256')
             response = JsonResponse({"response": "success"})

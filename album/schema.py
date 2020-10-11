@@ -1,11 +1,7 @@
 import graphene
-from graphene_django import DjangoObjectType
-
+from album.mutations import InitializeRelease
+from album.type import AlbumType
 from .models import Album
-
-class AlbumType(DjangoObjectType):
-    class Meta:
-        model = Album
 
 
 class Query(graphene.ObjectType):
@@ -18,7 +14,12 @@ class Query(graphene.ObjectType):
     def resolve_album_by_name(root, info, name):
         try:
             return Album.objects.get(name=name)
-        except Category.DoesNotExist:
+        except Album.DoesNotExist:
             return None
 
-schema = graphene.Schema(query=Query)
+
+class Mutation(graphene.ObjectType):
+    initialize_release = InitializeRelease.Field()
+
+
+schema = graphene.Schema(query=Query, mutation=Mutation)

@@ -2,12 +2,13 @@ import graphene
 from user.models import CustomUser
 from .type import UserType
 from .mutations import CreateUser
-
+from busking_auth.utils import decode_token
 
 class Query(graphene.ObjectType):
     all_users = graphene.List(UserType)
     user_by_name = graphene.Field(UserType,
                                   name=graphene.String(required=True))
+    me = graphene.Field(UserType)
 
     def resolve_all_users(root, info):
         return CustomUser.objects.all()
@@ -18,6 +19,9 @@ class Query(graphene.ObjectType):
         except CustomUser.DoesNotExist:
             return None
 
+    def resolve_me(root, info):
+        user = decode_token(info.context.COOKIES.get('token'))
+        return CustomUser.objects.get(id=user['user'])
 
 
 class Mutation(graphene.ObjectType):

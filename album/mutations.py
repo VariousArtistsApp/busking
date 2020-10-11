@@ -1,6 +1,6 @@
 import graphene
-from .schema import AlbumType
-from .models import Album
+from album.type import AlbumType
+from album.models import Album
 
 
 class CreateReleaseInput(graphene.InputObjectType):
@@ -12,7 +12,17 @@ class CreateReleaseInput(graphene.InputObjectType):
     tracks = graphene.List(graphene.String)
 
 
-class CreateAlbum(graphene.ObjectType):
+class InitializeRelease(graphene.Mutation):
+    class Arguments:
+        pass
+
+    release = graphene.Field(AlbumType)
+
+    def mutate(root, info, data=None):
+        return InitializeRelease(release=Album.objects.create())
+
+
+class CreateRelease(graphene.Mutation):
     class Arguments:
         data = CreateReleaseInput(required=True)
 

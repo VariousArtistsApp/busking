@@ -8,6 +8,6 @@ from django.conf.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login', csrf_exempt(login_view)),
-    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=False))),
+    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
     path("upload/", include("upload.urls", namespace="upload"))
 ]

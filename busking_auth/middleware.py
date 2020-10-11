@@ -1,7 +1,7 @@
 import jwt
 from busking.settings import SECRET_KEY
 from .exceptions import JSONWebTokenExpired, JSONWebTokenAbsent
-
+from busking_auth.utils import decode_token
 
 allowed_mutations = ["createUser", "createLabelUser", "createArtistUser",
                      "__schema"]
@@ -14,8 +14,7 @@ class AuthorizationMiddleware(object):
         if (info.path[0] not in allowed_mutations):
             if context.COOKIES.get('token'):
                 try:
-                    jwt.decode(context.COOKIES.get('token'), SECRET_KEY,
-                               verify=True)
+                    decode_token(context.COOKIES.get('token'))
                 except jwt.exceptions.ExpiredSignatureError:
                     raise JSONWebTokenExpired()
             else:
