@@ -31,7 +31,8 @@ class UploadTests(TestCase):
                 "id": label.id,
                 "type": "label",
                 "profile_picture": SimpleUploadedFile("2.png",
-                                        file.read(),
+                                        b"joemama",
+                                        #file.read(),
                                           content_type="image/png"),
             })
             response = response.json()

@@ -10,7 +10,7 @@ class Track(models.Model):
   file = models.FileField()
   picture = models.CharField(max_length=150)
   location = models.CharField(max_length=150)
-  total_listens = models.IntegerField()
+  total_listens = models.IntegerField(default=0)
   cost = models.IntegerField()
   name = models.CharField(max_length=50)
   description = models.CharField(max_length=150, null=True, blank=True)

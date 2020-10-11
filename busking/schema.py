@@ -20,6 +20,7 @@ class Query(
 
 class Mutation(
     user.schema.Mutation,
+    track.schema.Mutation,
 ):
     debug = graphene.Field(DjangoDebug, name="_debug")
 

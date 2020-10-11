@@ -1,11 +1,7 @@
 import graphene
-from graphene_django import DjangoObjectType
-
-from .models import Track
-
-class TrackType(DjangoObjectType):
-    class Meta:
-        model = Track
+from track.models import Track
+from .type import TrackType
+from .mutations import CreateTrack
 
 
 class Query(graphene.ObjectType):
@@ -18,7 +14,10 @@ class Query(graphene.ObjectType):
     def resolve_track_by_name(root, info, name):
         try:
             return Track.objects.get(name=name)
-        except Category.DoesNotExist:
+        except Track.DoesNotExist:
             return None
 
-schema = graphene.Schema(query=Query)
+class Mutation(graphene.ObjectType):
+    create_track = CreateTrack.Field()
+
+schema = graphene.Schema(query=Query, mutation=Mutation)

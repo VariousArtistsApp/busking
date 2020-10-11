@@ -21,3 +21,11 @@ def upload_profile_picture(request):
         profile.save()
         return JsonResponse({'response': 'success',
                              'picture_url': profile.profile_picture.url})
+
+def upload_tracks(request):
+    if request.method == "POST":
+        pass
+        # first off, create album
+        # /releases/{label|artist}_{id}/{abum_id}/<>
+        # iterate over tracks and create a track instance
+        # return track ids
