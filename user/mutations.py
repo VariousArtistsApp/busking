@@ -1,11 +1,12 @@
-import graphene
-from label.models import Label
-from label.schema import LabelType
-from artist.models import Artist
-from artist.schema import ArtistType
-from .type import UserType
-from user.models import CustomUser
 from datetime import datetime
+
+import graphene
+
+from artist.models import Artist
+from label.models import Label
+from user.models import CustomUser
+
+from .type import UserType
 
 
 def create_user(data):
@@ -13,7 +14,7 @@ def create_user(data):
                                           email=data.email,
                                           password=data.password,
                                           location=data.location,
-                                          dob=datetime.strptime(data.dob, "%m.%d.%Y"))
+                                          dob=datetime.strptime(data.dob, "%m.%d.%Y"))  # noqa E501
 
 
 class CreateUserInput(graphene.InputObjectType):

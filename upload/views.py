@@ -1,6 +1,8 @@
-from label.models import Label
-from artist.models import Artist
 from django.http import JsonResponse
+
+from artist.models import Artist
+from label.models import Label
+from track.models import Track
 
 
 def upload_profile_picture(request):
@@ -22,10 +24,17 @@ def upload_profile_picture(request):
         return JsonResponse({'response': 'success',
                              'picture_url': profile.profile_picture.url})
 
+
 def upload_tracks(request):
     if request.method == "POST":
-        pass
-        # first off, create album
-        # /releases/{label|artist}_{id}/{abum_id}/<>
-        # iterate over tracks and create a track instance
-        # return track ids
+        type = "artist"
+        if request.POST['type'] == "Label":
+            type = "label"
+        for key in request.FILES:
+            track = Track.objects.create(name=key,
+                                         location="{0}_{1}/{2}".format(type,
+                                                                       request.POST['profile_id'],  # noqa E501
+                                                                       request.POST['album_id']),   # noqa E501
+                                         file=request.FILES.get(key))
+        return JsonResponse({"response": "success",
+                             "track": {"name": key, "id": str(track.id)}})

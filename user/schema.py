@@ -1,8 +1,11 @@
 import graphene
-from user.models import CustomUser
-from .type import UserType
-from .mutations import CreateUser
+
 from busking_auth.utils import decode_token
+from user.models import CustomUser
+
+from .mutations import CreateUser
+from .type import UserType
+
 
 class Query(graphene.ObjectType):
     all_users = graphene.List(UserType)

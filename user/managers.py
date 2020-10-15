@@ -1,4 +1,5 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import BaseUserManager
+
 
 class CustomUserManager(BaseUserManager):
     use_in_migrations = True
@@ -28,6 +29,6 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
-            
+
         extra_fields.setdefault('dob', "2000-08-06")
         return self._create_user(email, name, password, **extra_fields)

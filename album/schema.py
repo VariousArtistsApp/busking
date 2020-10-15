@@ -1,12 +1,14 @@
 import graphene
-from album.mutations import InitializeRelease
+
+from album.mutations import InitializeRelease, UpdateRelease
 from album.type import AlbumType
+
 from .models import Album
 
 
 class Query(graphene.ObjectType):
     all_albums = graphene.List(AlbumType)
-    album_by_name = graphene.Field(AlbumType, name=graphene.String(required=True))
+    album_by_name = graphene.Field(AlbumType, name=graphene.String(required=True))  # noqa E501
 
     def resolve_all_albums(root, info):
         return Album.objects.all()
@@ -20,6 +22,7 @@ class Query(graphene.ObjectType):
 
 class Mutation(graphene.ObjectType):
     initialize_release = InitializeRelease.Field()
+    update_release = UpdateRelease.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

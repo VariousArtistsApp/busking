@@ -1,6 +1,7 @@
 import graphene
-from .type import TrackType
+
 from .models import Track
+from .type import TrackType
 
 
 class CreateTrackInput(graphene.InputObjectType):
@@ -13,9 +14,10 @@ class CreateTrackInput(graphene.InputObjectType):
 class CreateTrack(graphene.Mutation):
     class Arguments:
         data = CreateTrackInput(required=True)
-    
+
     track = graphene.Field(TrackType)
-    
+
     def mutate(root, info, data=None):
-        track = Track.objects.create(name=data.name, cost=data.cost, file=data.file)
+        track = Track.objects.create(name=data.name, price=data.cost,
+                                     file=data.file)
         return CreateTrack(track=track)

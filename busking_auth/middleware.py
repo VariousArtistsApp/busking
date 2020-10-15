@@ -1,7 +1,8 @@
 import jwt
-from busking.settings import SECRET_KEY
-from .exceptions import JSONWebTokenExpired, JSONWebTokenAbsent
+
 from busking_auth.utils import decode_token
+
+from .exceptions import JSONWebTokenAbsent, JSONWebTokenExpired
 
 allowed_mutations = ["createUser", "createLabelUser", "createArtistUser",
                      "__schema"]

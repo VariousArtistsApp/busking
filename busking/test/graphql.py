@@ -3,10 +3,7 @@ https://github.com/graphql-python/graphene-django/blob/master/graphene_django/ut
 MIT LICENSE
 '''
 import json
-from django.test import TestCase, Client
 from http.cookies import SimpleCookie
-from graphene_django.utils.testing import GraphQLTestCase
-
 
 DEFAULT_GRAPHQL_URL = "/graphql/"
 
@@ -56,7 +53,7 @@ def graphql_query(
             body["variables"]["input"] = input_data
         else:
             body["variables"] = {"input": input_data}
-    
+
     # Pretty much the only difference in the function to add a token cookie
     if login_token:
         client.cookies = SimpleCookie({"token": login_token})
@@ -75,18 +72,4 @@ def graphql_query(
             graphql_url, json.dumps(body), content_type="application/json"
         )
     return resp
-
-
-class GraphQLTestCaseWithCookies(GraphQLTestCase):
-    def query(self, query, op_name=None, input_data=None, variables=None,
-              headers=None, login_token=None):
-        return graphql_query(
-            query,
-            op_name=op_name,
-            input_data=input_data,
-            variables=variables,
-            headers=headers,
-            client=self._client,
-            graphql_url=self.GRAPHQL_URL,
-            login_token=login_token
-        )
+# flake8: noqa

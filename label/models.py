@@ -1,6 +1,8 @@
+import uuid
+
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-import uuid
+
 from busking import settings
 from upload.storage_backends import PublicStorage
 
@@ -31,4 +33,3 @@ class Label(models.Model):
     bandcamp_link = models.CharField(max_length=150, null=True, blank=True)
     soundcloud_link = models.CharField(max_length=150, null=True, blank=True)
     beatport_link = models.CharField(max_length=150, null=True, blank=True)
-    

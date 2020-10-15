@@ -1,10 +1,11 @@
-import album.schema
-import artist.schema
-import track.schema
-import user.schema
-import label.schema
 import graphene
 from graphene_django.debug import DjangoDebug
+
+import album.schema
+import artist.schema
+import label.schema
+import track.schema
+import user.schema
 
 
 class Query(

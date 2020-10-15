@@ -1,9 +1,11 @@
-from django.http import JsonResponse, HttpResponseForbidden
-from django.contrib.auth import authenticate
-import json
-import jwt
-from busking.settings import SECRET_KEY
 import datetime
+import json
+
+import jwt
+from django.contrib.auth import authenticate
+from django.http import HttpResponseForbidden, JsonResponse
+
+from busking.settings import SECRET_KEY
 
 
 def login_view(request):

@@ -1,9 +1,10 @@
+from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
-from graphene_django.views import GraphQLView
 from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
+
 from busking_auth.views import login_view
-from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),

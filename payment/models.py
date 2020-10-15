@@ -1,6 +1,7 @@
+import uuid
+
 from django.db import models
 from djmoney.models.fields import MoneyField
-import uuid
 
 
 class Payment(models.Model):
