@@ -15,24 +15,28 @@ class ReleaseTrackInput(graphene.InputObjectType):
     artists = graphene.List(graphene.String, required=True)
 
 
-class UpdateReleaseInput(graphene.InputObjectType):
-    id = graphene.String(required=True)
+class CreateReleaseInput(graphene.InputObjectType):
     name = graphene.String(required=True)
     date = graphene.String(required=True)
     description = graphene.String(required=True)
-    artistName = graphene.String()
-    labelName = graphene.String()
+
+
+class UpdateReleaseInput(CreateReleaseInput):
+    id = graphene.String(required=True)
     tracks = graphene.List(ReleaseTrackInput, required=True)
 
 
-class InitializeRelease(graphene.Mutation):
+class CreateRelease(graphene.Mutation):
     class Arguments:
-        pass
+        data = CreateReleaseInput(required=True)
 
     release = graphene.Field(AlbumType)
 
     def mutate(root, info, data=None):
-        return InitializeRelease(release=Album.objects.create())
+        release = Album.objects.create(name=data.name,
+                                    #   date=datetime.strptime(data.date, "%d.%m.%Y"), # noqa E501
+                                       description=data.description)
+        return CreateRelease(release=release)
 
 
 class UpdateRelease(graphene.Mutation):
@@ -59,4 +63,4 @@ class UpdateRelease(graphene.Mutation):
             release_tracks.append(item)
         release.tracks.set(release_tracks, clear=True)
         release.save()
-        return UpdateRelease(release=release)
+        return UpdateRelease(release=Album.objects.first())

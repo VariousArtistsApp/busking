@@ -1,6 +1,6 @@
 import graphene
 
-from album.mutations import InitializeRelease, UpdateRelease
+from album.mutations import CreateRelease, UpdateRelease
 from album.type import AlbumType
 
 from .models import Album
@@ -21,7 +21,7 @@ class Query(graphene.ObjectType):
 
 
 class Mutation(graphene.ObjectType):
-    initialize_release = InitializeRelease.Field()
+    create_release = CreateRelease.Field()
     update_release = UpdateRelease.Field()
 
 
