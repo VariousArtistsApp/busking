@@ -52,5 +52,4 @@ class UploadTests(TestCase):
             })
             response = response.json()
             self.assertEqual(response["response"], "success")
-            self.assertNotEqual(response["tracks"], None)
-            print(response['tracks'])
+            self.assertNotEqual(response["track"], None)

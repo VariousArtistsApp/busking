@@ -14,7 +14,7 @@ class TrackTest(GraphQLTestCaseWithCookies):
         )
         fake_track = {
             "name": "Temptress (Original Mix)",
-            "artistName": "Permanent Daylight",
+            "artists": ["Permanent Daylight"],
             "price": 199,
             "file": "http://va.app/static/something"
         }

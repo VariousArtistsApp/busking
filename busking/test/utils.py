@@ -2,10 +2,10 @@ import datetime
 import uuid
 
 import jwt
+from graphene_django.utils.testing import GraphQLTestCase
 
 from busking.settings import SECRET_KEY
-
-from .graphql import GraphQLTestCase, graphql_query
+from busking.test.graphql import graphql_query
 
 
 def generate_fake_token():

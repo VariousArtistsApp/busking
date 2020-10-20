@@ -47,7 +47,7 @@ class UpdateRelease(graphene.Mutation):
         except Album.DoesNotExist:
             raise Exception("Album??")
         release.name = data.name
-        release.date = datetime.strptime(data.date, "%m.%d.%Y")
+        release.date = datetime.strptime(data.date, "%d.%m.%Y")
         release.description = data.credits
         release_tracks = []
 

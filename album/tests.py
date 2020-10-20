@@ -12,6 +12,7 @@ class ReleaseTests(GraphQLTestCaseWithCookies):
 
     def test_create_release(self):
         user = generate_fake_user()
+        user['dob'] = "2020-01-01"
         CustomUser.objects.create(
             **user
         )
@@ -42,7 +43,7 @@ class ReleaseTests(GraphQLTestCaseWithCookies):
                 "id": str(release.id),
                 "name": "Temptress",
                 "date": "06.08.2020",
-                "credits": "Mixed by: Aarnav, Mastered by Aarnav. W+P Aarnav",
+                "credits": "Mixed by Aarnav, Mastered by Aarnav. W+P Aarnav",
                 "tracks": [{
                     "name": "Temptress",
                     "price": 0.99,
@@ -56,4 +57,7 @@ class ReleaseTests(GraphQLTestCaseWithCookies):
                 }]
 
             })
-        print(response.json())
+            resposne = response.json()['data']['updateRelease']['release']
+            self.assertEqual(response['id'], str(release.id))
+            self.assertEqual(response['tracks'][0]['id'], str(track_one.id))
+            self.assertEqual(response['tracks'][1]['id'], str(track_two.id))

@@ -6,7 +6,7 @@ from .type import TrackType
 
 class CreateTrackInput(graphene.InputObjectType):
     name = graphene.String(required=True)
-    artistName = graphene.String(required=True)
+    artists = graphene.List(graphene.String)
     price = graphene.String(required=True)
     file = graphene.String(required=True)
 

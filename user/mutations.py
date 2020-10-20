@@ -14,7 +14,7 @@ def create_user(data):
                                           email=data.email,
                                           password=data.password,
                                           location=data.location,
-                                          dob=datetime.strptime(data.dob, "%m.%d.%Y"))  # noqa E501
+                                          dob=datetime.strptime(data.dob, "%d.%m.%Y"))  # noqa E501
 
 
 class CreateUserInput(graphene.InputObjectType):
