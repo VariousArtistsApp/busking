@@ -42,8 +42,8 @@ class ReleaseTests(GraphQLTestCaseWithCookies):
             input_data={
                 "id": str(release.id),
                 "name": "Temptress",
-                "date": "06.08.2020",
-                "credits": "Mixed by Aarnav, Mastered by Aarnav. W+P Aarnav",
+                "releaseDate": "06.08.2020",
+                "description": "Mixed by Aarnav, Mastered by Aarnav. W+P Aarnav",  # noqa E501
                 "tracks": [{
                     "name": "Temptress",
                     "price": 0.99,
