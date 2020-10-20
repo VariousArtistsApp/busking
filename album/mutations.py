@@ -19,7 +19,7 @@ class UpdateReleaseInput(graphene.InputObjectType):
     id = graphene.String(required=True)
     name = graphene.String(required=True)
     date = graphene.String(required=True)
-    credits = graphene.String(required=True)
+    description = graphene.String(required=True)
     artistName = graphene.String()
     labelName = graphene.String()
     tracks = graphene.List(ReleaseTrackInput, required=True)
@@ -48,7 +48,7 @@ class UpdateRelease(graphene.Mutation):
             raise Exception("Album??")
         release.name = data.name
         release.date = datetime.strptime(data.date, "%d.%m.%Y")
-        release.description = data.credits
+        release.description = data.description
         release_tracks = []
         for track in data.tracks:
             item = Track.objects.get(id=track.id)
