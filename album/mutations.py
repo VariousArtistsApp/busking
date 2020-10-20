@@ -17,7 +17,7 @@ class ReleaseTrackInput(graphene.InputObjectType):
 
 class CreateReleaseInput(graphene.InputObjectType):
     name = graphene.String(required=True)
-    date = graphene.String(required=True)
+    release_date = graphene.String(required=True)
     description = graphene.String(required=True)
 
 
@@ -34,7 +34,7 @@ class CreateRelease(graphene.Mutation):
 
     def mutate(root, info, data=None):
         release = Album.objects.create(name=data.name,
-                                    #   date=datetime.strptime(data.date, "%d.%m.%Y"), # noqa E501
+                                       release_date=datetime.strptime(data.release_date, "%d.%m.%Y"),  # noqa E501
                                        description=data.description)
         return CreateRelease(release=release)
 
@@ -51,7 +51,7 @@ class UpdateRelease(graphene.Mutation):
         except Album.DoesNotExist:
             raise Exception("Album??")
         release.name = data.name
-        release.date = datetime.strptime(data.date, "%d.%m.%Y")
+        release.release_date = datetime.strptime(data.release_date, "%d.%m.%Y")
         release.description = data.description
         release_tracks = []
         for track in data.tracks:
