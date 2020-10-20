@@ -31,10 +31,10 @@ def upload_tracks(request):
         if request.POST['type'] == "Label":
             type = "label"
         for key in request.FILES:
-            track = Track.objects.create(name=key,
-                                         location="{0}_{1}/{2}".format(type,
-                                                                       request.POST['profile_id'],  # noqa E501
-                                                                       request.POST['album_id']),   # noqa E501
-                                         file=request.FILES.get(key))
+            track = Track(name=key, file=request.FILES.get(key))
+            track._file_path = "{0}_{1}/{2}".format(type,
+                                                    request.POST['profile_id'],
+                                                    request.POST['album_id']),
+            track.save()
         return JsonResponse({"response": "success",
                              "track": {"name": key, "id": str(track.id)}})

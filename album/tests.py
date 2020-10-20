@@ -57,7 +57,7 @@ class ReleaseTests(GraphQLTestCaseWithCookies):
                 }]
 
             })
-            resposne = response.json()['data']['updateRelease']['release']
-            self.assertEqual(response['id'], str(release.id))
-            self.assertEqual(response['tracks'][0]['id'], str(track_one.id))
-            self.assertEqual(response['tracks'][1]['id'], str(track_two.id))
+        response = response.json()['data']['updateRelease']['release']
+        self.assertEqual(response['id'], str(release.id))
+        self.assertEqual(response['tracks'][0]['id'], str(track_one.id))
+        self.assertEqual(response['tracks'][1]['id'], str(track_two.id))

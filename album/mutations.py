@@ -50,7 +50,6 @@ class UpdateRelease(graphene.Mutation):
         release.date = datetime.strptime(data.date, "%d.%m.%Y")
         release.description = data.credits
         release_tracks = []
-
         for track in data.tracks:
             item = Track.objects.get(id=track.id)
             item.name = track.name
