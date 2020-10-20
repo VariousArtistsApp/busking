@@ -13,8 +13,6 @@ def get_track_path(instance, filename):
 
 
 class Track(models.Model):
-    # albums
-    # artists
     # playList
     # likes
     # tags
